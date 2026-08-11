@@ -47,8 +47,14 @@ export class binaryTree {
     let currentNode = this.#root;
     while (currentNode !== null) {
       if (currentNode.nodeValue === value) return true;
-      if (currentNode.nodeValue > value) currentNode = currentNode.leftNode;
-      if (currentNode.nodeValue < value) currentNode = currentNode.rightNode;
+      if (currentNode.nodeValue > value) {
+        if (currentNode.leftNode === null) return false;
+        currentNode = currentNode.leftNode;
+      }
+      if (currentNode.nodeValue < value) {
+        if (currentNode.rightNode === null) return false;
+        currentNode = currentNode.rightNode;
+      }
     }
     return false;
   }
