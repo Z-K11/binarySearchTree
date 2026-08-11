@@ -58,19 +58,19 @@ export class binaryTree {
       return;
     } else this.traverse(value, this.#root);
   }
-  traverse(value, currentNode) {
+  #traverse(value, currentNode) {
     if (currentNode.nodeValue < value) {
       if (currentNode.rightNode === null) {
         currentNode.rightNode = new node(value);
         return;
       }
-      this.traverse(value, currentNode.rightNode);
+      this.#traverse(value, currentNode.rightNode);
     } else if (currentNode.nodeValue > value) {
       if (currentNode.leftNode === null) {
         currentNode.leftNode = new node(value);
         return;
       }
-      this.traverse(value, currentNode.leftNode);
+      this.#traverse(value, currentNode.leftNode);
     }
   }
 }
