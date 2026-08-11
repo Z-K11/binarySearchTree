@@ -36,4 +36,13 @@ export class binaryTree {
       true
     );
   };
+  includes(value) {
+    let currentNode = this.#root;
+    while (currentNode !== null) {
+      if (currentNode.nodeValue === value) return true;
+      if (currentNode.nodeValue > value) currentNode = currentNode.leftNode;
+      if (currentNode.nodeValue < value) currentNode = currentNode.rightNode;
+    }
+    return false;
+  }
 }

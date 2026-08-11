@@ -1,13 +1,13 @@
 export class node {
   // this is the root of the node
-  #root;
+  #data;
   // left pointer points to the left subtree
   #left;
   // right pointer points to the right subtree
   #right;
   constructor(x) {
     // initializing the tree
-    this.#root = x;
+    this.#data = x;
     this.#left = null;
     this.#right = null;
   }
@@ -24,7 +24,7 @@ export class node {
 
   // return value stored in root
   get nodeValue() {
-    return this.#root;
+    return this.#data;
   }
 
   // assign subtree to left subtree pointer
