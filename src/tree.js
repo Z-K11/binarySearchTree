@@ -56,21 +56,55 @@ export class binaryTree {
     if (this.#root === null) {
       this.#root = new node(value);
       return;
-    } else this.traverse(value, this.#root);
+    } else this.#inserttraverse(value, this.#root);
   }
-  #traverse(value, currentNode) {
+  #inserttraverse(value, currentNode) {
     if (currentNode.nodeValue < value) {
       if (currentNode.rightNode === null) {
         currentNode.rightNode = new node(value);
         return;
       }
-      this.#traverse(value, currentNode.rightNode);
+      this.#inserttraverse(value, currentNode.rightNode);
     } else if (currentNode.nodeValue > value) {
       if (currentNode.leftNode === null) {
         currentNode.leftNode = new node(value);
         return;
       }
-      this.#traverse(value, currentNode.leftNode);
+      this.#inserttraverse(value, currentNode.leftNode);
     }
+  }
+  remove(value) {
+    if (this.#root.nodeValue === value) {
+      this.#root = null;
+      return;
+    } else {
+      this.#removeTraverse(value, this.#root);
+    }
+  }
+  #removeTraverse(value, currentNode) {
+    if (currentNode.leftNode !== null) {
+      if (currentNode.leftNode.nodeValue === value) {
+        if (
+          currentNode.leftNode.leftNode === null &&
+          currentNode.leftNode.rightNode === null
+        )
+          currentNode.leftNode = null;
+        return;
+      }
+    }
+    if (currentNode.rightNode !== null) {
+      if (currentNode.rightNode.nodeValue === value) {
+        if (
+          currentNode.rightNode.leftNode === null &&
+          currentNode.rightNode.rightNode === null
+        )
+          currentNode.rightNode = null;
+        return;
+      }
+    }
+    if (value > currentNode.nodeValue)
+      this.#removeTraverse(value, currentNode.rightNode);
+    else if (value < currentNode.nodeValue)
+      this.#removeTraverse(value, currentNode.leftNode);
   }
 }
