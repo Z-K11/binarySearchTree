@@ -86,43 +86,35 @@ export class binaryTree {
 
   // remove the given value from the tree
   remove(value) {
-    if (this.#root.nodeValue === value) {
-      this.#root = null;
-      return;
-    } else {
-      this.#removeTraverse(value, this.#root);
-    }
+    this.#root = this.#removeTraverse(value, this.#root);
   }
 
   // traverse the tree and remove node
   #removeTraverse(value, currentNode) {
-    if (currentNode.leftNode !== null) {
-      if (currentNode.leftNode.nodeValue === value) {
-        if (
-          currentNode.leftNode.leftNode === null &&
-          currentNode.leftNode.rightNode === null
-        ) {
-          currentNode.leftNode = null;
-          return;
-        }
-      }
-    }
-    if (currentNode.rightNode !== null) {
-      if (currentNode.rightNode.nodeValue === value) {
-        if (
-          currentNode.rightNode.leftNode === null &&
-          currentNode.rightNode.rightNode === null
-        ) {
-          currentNode.rightNode = null;
-          return;
-        }
-      }
-    }
+    if (currentNode === null) return currentNode;
     if (value > currentNode.nodeValue)
-      this.#removeTraverse(value, currentNode.rightNode);
+      currentNode.rightNode = this.#removeTraverse(
+        value,
+        currentNode.rightNode
+      );
     else if (value < currentNode.nodeValue)
-      this.#removeTraverse(value, currentNode.leftNode);
+      currentNode.leftNode = this.#removeTraverse(value, currentNode.leftNode);
+    else {
+      if (currentNode.leftNode === null) return currentNode.rightNode;
+      else if (currentNode.rightNode === null) return currentNode.leftNode;
+      else {
+        const successor = this.#successor(currentNode.rightNode);
+        currentNode.nodeValue = successor.nodeValue;
+        currentNode.rightNode = this.#removeTraverse(
+          currentNode.nodeValue,
+          currentNode.rightNode
+        );
+      }
+    }
+    return currentNode;
   }
+
+  //find the correct successfor for the node being deleted
   #successor(root) {
     while (root.leftNode !== null && root !== null) {
       root = root.leftNode;

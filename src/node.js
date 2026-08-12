@@ -36,4 +36,7 @@ export class node {
   set rightNode(node) {
     this.#right = node;
   }
+  set nodeValue(x) {
+    this.#data = x;
+  }
 }

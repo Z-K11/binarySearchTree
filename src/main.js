@@ -3,7 +3,7 @@ const tree = new binaryTree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 tree.insert(58);
 tree.insert(22);
 tree.remove(22);
-tree.remove(1);
+tree.remove(5);
 tree.prettyPrint();
 console.log(tree.includes(10));
 console.log(tree.includes(1));
