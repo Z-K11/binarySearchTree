@@ -137,4 +137,12 @@ export class binaryTree {
     currentNode.nodeValue = func(currentNode.nodeValue);
     this.inOrderForEach(func, currentNode.rightNode);
   }
+
+  // takes a callBack function as an arguement and traverses the tree in postOrderTraversal calling the function on each node
+  postOrderForEach(func, currentNode = this.#root) {
+    if (currentNode === null) return;
+    this.postOrderForEach(func, currentNode.leftNode);
+    this.postOrderForEach(func, currentNode.rightNode);
+    currentNode.nodeValue = func(currentNode.nodeValue);
+  }
 }
