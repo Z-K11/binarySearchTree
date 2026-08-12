@@ -121,4 +121,11 @@ export class binaryTree {
     }
     return root;
   }
+  forEach(func, currentNode = this.#root) {
+    if (currentNode === null) return;
+    currentNode.nodeValue = func(currentNode.nodeValue);
+    this.forEach(func, currentNode.leftNode);
+    this.forEach(func, currentNode.rightNode);
+  }
+  return;
 }
