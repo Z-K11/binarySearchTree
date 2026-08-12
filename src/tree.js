@@ -58,12 +58,16 @@ export class binaryTree {
     }
     return false;
   }
+
+  // insert given value into the tree
   insert(value) {
     if (this.#root === null) {
       this.#root = new node(value);
       return;
     } else this.#inserttraverse(value, this.#root);
   }
+
+  // traverse the tree and insert value
   #inserttraverse(value, currentNode) {
     if (currentNode.nodeValue < value) {
       if (currentNode.rightNode === null) {
@@ -79,6 +83,8 @@ export class binaryTree {
       this.#inserttraverse(value, currentNode.leftNode);
     }
   }
+
+  // remove the given value from the tree
   remove(value) {
     if (this.#root.nodeValue === value) {
       this.#root = null;
@@ -87,15 +93,18 @@ export class binaryTree {
       this.#removeTraverse(value, this.#root);
     }
   }
+
+  // traverse the tree and remove node
   #removeTraverse(value, currentNode) {
     if (currentNode.leftNode !== null) {
       if (currentNode.leftNode.nodeValue === value) {
         if (
           currentNode.leftNode.leftNode === null &&
           currentNode.leftNode.rightNode === null
-        )
+        ) {
           currentNode.leftNode = null;
-        return;
+          return;
+        }
       }
     }
     if (currentNode.rightNode !== null) {
@@ -103,14 +112,21 @@ export class binaryTree {
         if (
           currentNode.rightNode.leftNode === null &&
           currentNode.rightNode.rightNode === null
-        )
+        ) {
           currentNode.rightNode = null;
-        return;
+          return;
+        }
       }
     }
     if (value > currentNode.nodeValue)
       this.#removeTraverse(value, currentNode.rightNode);
     else if (value < currentNode.nodeValue)
       this.#removeTraverse(value, currentNode.leftNode);
+  }
+  #successor(root) {
+    while (root.leftNode !== null && root !== null) {
+      root = root.leftNode;
+    }
+    return root;
   }
 }
