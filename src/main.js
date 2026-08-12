@@ -4,7 +4,7 @@ tree.insert(58);
 tree.insert(22);
 tree.remove(22);
 tree.remove(5);
-tree.postOrderForEach((a) => a * 11);
+tree.forEach((a) => a * 11);
 tree.prettyPrint();
 console.log(tree.includes(10));
 console.log(tree.includes(1));

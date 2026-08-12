@@ -123,11 +123,15 @@ export class binaryTree {
   }
 
   // takes a callBack function as an arguement and traverses the tree in levelorder calling the function on each node
-  forEach(func, currentNode = this.#root) {
-    if (currentNode === null) return;
-    currentNode.nodeValue = func(currentNode.nodeValue);
-    this.forEach(func, currentNode.leftNode);
-    this.forEach(func, currentNode.rightNode);
+  forEach(func, root = this.#root) {
+    if (root === null) return;
+    const que = [this.#root];
+    while (que.length > 0) {
+      const currentNode = que.shift();
+      currentNode.nodeValue = func(currentNode.nodeValue);
+      if (currentNode.leftNode !== null) que.push(currentNode.leftNode);
+      if (currentNode.rightNode !== null) que.push(currentNode.rightNode);
+    }
   }
 
   // takes a callBack function as an arguement and traverses the tree in inOrderTraversal calling the function on each node
@@ -150,7 +154,7 @@ export class binaryTree {
   preOrderforEach(func, currentNode = this.#root) {
     if (currentNode === null) return;
     currentNode.nodeValue = func(currentNode.nodeValue);
-    this.forEach(func, currentNode.leftNode);
-    this.forEach(func, currentNode.rightNode);
+    this.preOrderforEach(func, currentNode.leftNode);
+    this.preOrderforEach(func, currentNode.rightNode);
   }
 }
