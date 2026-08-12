@@ -121,11 +121,20 @@ export class binaryTree {
     }
     return root;
   }
+
+  // takes a callBack function as an arguement and traverses the tree in levelorder calling the function on each node
   forEach(func, currentNode = this.#root) {
     if (currentNode === null) return;
     currentNode.nodeValue = func(currentNode.nodeValue);
     this.forEach(func, currentNode.leftNode);
     this.forEach(func, currentNode.rightNode);
   }
-  return;
+
+  // takes a callBack function as an arguement and traverses the tree in inOrderTraversal calling the function on each node
+  inOrderForEach(func, currentNode = this.#root) {
+    if (currentNode === null) return;
+    this.inOrderForEach(func, currentNode.leftNode);
+    currentNode.nodeValue = func(currentNode.nodeValue);
+    this.inOrderForEach(func, currentNode.rightNode);
+  }
 }
