@@ -158,14 +158,30 @@ export class binaryTree {
     this.preOrderforEach(func, currentNode.rightNode);
   }
 
-  //function that calcultaes the height of the node containing the value
-  height(x, currentNode = this.#root, edges = 0) {
-    if (currentNode === null || currentNode.nodeValue === x) {
+  //function that calcultaes the depth of the node of the node containing the value
+  depth(x, currentNode = this.#root, edges = 0) {
+    if (currentNode === null) return undefined;
+    if (currentNode.nodeValue === x) {
       return edges;
     }
     if (x > currentNode.nodeValue)
-      return this.height(x, currentNode.rightNode, edges + 1);
+      return this.depth(x, currentNode.rightNode, edges + 1);
     if (x < currentNode.nodeValue)
-      return this.height(x, currentNode.leftNode, edges + 1);
+      return this.depth(x, currentNode.leftNode, edges + 1);
+  }
+
+  // function that calculates the height of the node containing the value
+  #heightOfTree(currentNode) {
+    if (currentNode === null) return -1;
+    const lheight = this.#heightOfTree(currentNode.leftNode);
+    const rheight = this.#heightOfTree(currentNode.rightNode);
+    return 1 + Math.max(lheight, rheight);
+  }
+  height(x, currentNode = this.#root) {
+    if (currentNode === null) return -1;
+    if (currentNode.nodeValue === x) return this.#heightOfTree(currentNode);
+
+    if (x > currentNode.nodeValue) return this.height(x, currentNode.rightNode);
+    if (x < currentNode.nodeValue) return this.height(x, currentNode.leftNode);
   }
 }

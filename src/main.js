@@ -9,4 +9,5 @@ tree.prettyPrint();
 console.log(tree.includes(10));
 console.log(tree.includes(1));
 console.log(tree.includes(13));
-console.log(tree.height(44));
+console.log(tree.depth(638));
+console.log(tree.height(66));
