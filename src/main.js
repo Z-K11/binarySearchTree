@@ -9,5 +9,6 @@ tree.prettyPrint();
 console.log(tree.includes(10));
 console.log(tree.includes(1));
 console.log(tree.includes(13));
-console.log(tree.depth(638));
-console.log(tree.height(66));
+console.log(tree.height(88));
+console.log(tree.height(22));
+console.log(`Checking for balance ${tree.isBalanced()}`);

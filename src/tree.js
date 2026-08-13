@@ -184,4 +184,14 @@ export class binaryTree {
     if (x > currentNode.nodeValue) return this.height(x, currentNode.rightNode);
     if (x < currentNode.nodeValue) return this.height(x, currentNode.leftNode);
   }
+  isBalanced(currentNode = this.#root) {
+    if (currentNode === null) return true;
+    const lheigh = this.#heightOfTree(currentNode.leftNode);
+    const rheigh = this.#heightOfTree(currentNode.rightNode);
+    if (Math.abs(lheigh - rheigh) > 1) return false;
+    return (
+      this.isBalanced(currentNode.leftNode) &&
+      this.isBalanced(currentNode.rightNode)
+    );
+  }
 }
