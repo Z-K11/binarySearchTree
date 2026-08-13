@@ -177,6 +177,8 @@ export class binaryTree {
     const rheight = this.#heightOfTree(currentNode.rightNode);
     return 1 + Math.max(lheight, rheight);
   }
+
+  //calculates the heigh of the node with given value
   height(x, currentNode = this.#root) {
     if (currentNode === null) return -1;
     if (currentNode.nodeValue === x) return this.#heightOfTree(currentNode);
@@ -184,6 +186,8 @@ export class binaryTree {
     if (x > currentNode.nodeValue) return this.height(x, currentNode.rightNode);
     if (x < currentNode.nodeValue) return this.height(x, currentNode.leftNode);
   }
+
+  // checks if the tree is balanced
   isBalanced(currentNode = this.#root) {
     if (currentNode === null) return true;
     const lheigh = this.#heightOfTree(currentNode.leftNode);
@@ -204,6 +208,7 @@ export class binaryTree {
     return arr;
   }
 
+  // checks if the treee is unbalanced and creates a new tree from the nodes of the current tree and assign it to root
   rebalance() {
     if (this.isBalanced()) return false;
     else {
