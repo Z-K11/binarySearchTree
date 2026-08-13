@@ -157,4 +157,15 @@ export class binaryTree {
     this.preOrderforEach(func, currentNode.leftNode);
     this.preOrderforEach(func, currentNode.rightNode);
   }
+
+  //function that calcultaes the height of the node containing the value
+  height(x, currentNode = this.#root, edges = 0) {
+    if (currentNode === null || currentNode.nodeValue === x) {
+      return edges;
+    }
+    if (x > currentNode.nodeValue)
+      return this.height(x, currentNode.rightNode, edges + 1);
+    if (x < currentNode.nodeValue)
+      return this.height(x, currentNode.leftNode, edges + 1);
+  }
 }
