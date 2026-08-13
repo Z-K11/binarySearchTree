@@ -24,7 +24,7 @@ export class binaryTree {
   }
 
   // prints the binary tree recursively
-  prettyPrint = (node = this.#root, prefix = '', isLeft = true) => {
+  prettyPrint(node = this.#root, prefix = '', isLeft = true) {
     if (node === null || node === undefined) {
       return;
     }
@@ -40,7 +40,7 @@ export class binaryTree {
       `${prefix}${isLeft ? '    ' : '│   '}`,
       true
     );
-  };
+  }
 
   // recursively searches for a value inside the tree if the value exists returns true
   includes(value) {
@@ -193,5 +193,28 @@ export class binaryTree {
       this.isBalanced(currentNode.leftNode) &&
       this.isBalanced(currentNode.rightNode)
     );
+  }
+
+  // returns a sorted array of values from tree using inOrder Traversal;
+  #arrayFromBinaryTree(currentNode = this.#root, arr = []) {
+    if (currentNode === null) return;
+    this.#arrayFromBinaryTree(currentNode.leftNode, arr);
+    arr.push(currentNode.nodeValue);
+    this.#arrayFromBinaryTree(currentNode.rightNode, arr);
+    return arr;
+  }
+
+  rebalance() {
+    if (this.isBalanced()) return false;
+    else {
+      const sortedArray = this.#arrayFromBinaryTree();
+      this.#root = this.#buildTree(
+        sortedArray,
+        0,
+        sortedArray.length - 1,
+        this.#root
+      );
+      return true;
+    }
   }
 }
