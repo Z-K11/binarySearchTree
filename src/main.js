@@ -16,4 +16,4 @@ console.log(`Array from bst = ${tree.rebalance()}`);
 tree.prettyPrint();
 console.log(`Checking for balance ${tree.isBalanced()}`);
 tree.insert(34);
-tree.includes(34);
+console.log(tree.includes(34));
